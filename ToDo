@@ -1,0 +1,107 @@
+                    --------------------------------------------------------------
+                     |                  REGULATE PAGE ACCESS                    |
+                    --------------------------------------------------------------
+
+
+                    ===============================================================
+                     |            # User Authentication is Essential             |
+                    ===============================================================
+
+    - Password-protected areas are common in most web apps
+    - Learning best practices avoids costly mistakes
+    - Development choices and security concerns are
+      intertwined topics
+
+                                  # TICKET ANALOGY
+    - Purchase tickets for a concert          - Admin creates a user
+    - Present ID at the gate                  - User logs in via a login form
+    - Get handstamp amd enter concert         - User is authenticated and given access
+    - Show handstamp, avoid line, and reenter - User requests additional password-protected pages
+    - Wash away handstamp                     - User logs out
+
+                                  # User Authentication
+    - User logs in via  login form
+    - Application searches for the username in the database
+    - If the username is found, it encrypts the form password and compares it with the encrypted stored password
+    - If the passwords match, then it sets a value in the session to the user ID and redirects to post-login
+    - User request additional password-protected pages
+    - Application checks the session data for the user ID
+    - If present, it returns the requested page
+    - If absent, it redirects to the login form
+    - User logs out
+    - User ID stored in session is removed
+
+                    ===============================================================
+                     |                   # Create admins tables                  |
+                    ===============================================================
+    CREATE TABLE admins (
+      id INT(11) NOT NULL AUTO_INCREMENT,
+      first_name VARCHAR(255),
+      last_name VARCHAR(255),
+      email VARCHAR(255),
+      username VARCHAR(255),
+      hashed_password VARCHAR(255),
+      PRIMARY KEY (id)
+    );
+
+    ALTER TABLE admins ADD INDEX index_username (username);
+
+
+
+
+
+
+
+
+                    ===============================================================
+                     |                   # Build admin management                |
+                    ===============================================================
+
+
+
+
+
+
+===============================================================
+ |                   # PHP password functions                |
+===============================================================
+
+
+
+
+
+===============================================================
+ |                  # Authenticate user access               |
+===============================================================
+
+
+
+
+
+===============================================================
+ |                   # Require authorization                 |
+===============================================================
+
+
+
+
+
+===============================================================
+ |                   # Log out a user                        |
+===============================================================
+
+
+
+
+
+===============================================================
+ |                  # Optional password updating             |
+===============================================================
+
+
+
+
+
+===============================================================
+ |                    # Authorized previewing                |
+===============================================================
