@@ -2,6 +2,8 @@
 
 <?php
 
+  require_login();
+
   $page_set = find_all_pages();
 
 ?>
