@@ -69,7 +69,21 @@
                      |                   # PHP password functions                |
                     ===============================================================
 
+# Encrypting Passwords
 
+- Never store passwords in plain text
+- Users reuse passwords
+- Use one-way encryption
+- Same inputs + same + hashing algorithm = same output
+- Encrypts the actual password, and then stores it
+- Encrypts the attempted password and then compares it to stored password
+- Encryption algorithm: one-way, strong, slow
+- Bcrypt, based on Blowfish cipher
+
+    // PHP > 5.5
+    - password_hash($password, PASSWORD_DEFAULT);
+    - password_hash($password, PASSWORD_BCRYPT), ['cost' => 10]);
+    - password_verify($password, $shared_password);
 
 
 
