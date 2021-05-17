@@ -1,5 +1,4 @@
 <?php
-global $db;
 
 require_once('../../../private/initialize.php');
 
