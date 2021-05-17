@@ -34,28 +34,32 @@
                     ===============================================================
                      |                   # Create admins tables                  |
                     ===============================================================
-    CREATE TABLE admins (
-      id INT(11) NOT NULL AUTO_INCREMENT,
-      first_name VARCHAR(255),
-      last_name VARCHAR(255),
-      email VARCHAR(255),
-      username VARCHAR(255),
-      hashed_password VARCHAR(255),
-      PRIMARY KEY (id)
-    );
+                    CREATE TABLE admins (
+                      id INT(11) NOT NULL AUTO_INCREMENT,
+                      first_name VARCHAR(255),
+                      last_name VARCHAR(255),
+                      email VARCHAR(255),
+                      username VARCHAR(255),
+                      hashed_password VARCHAR(255),
+                      PRIMARY KEY (id)
+                    );
 
-    ALTER TABLE admins ADD INDEX index_username (username);
+                    ALTER TABLE admins ADD INDEX index_username (username);
 
 
                     ===============================================================
                      |                   # Build admin management                |
                     ===============================================================
 
-    - /staff/admins/index.php
-    - /staff/admins/show.php
-    - /staff/admins/new.php
-    - /staff/admins/edit.php
+        # For the Admin CRUD          # Admin Queries         # Admin Validations
 
+        - /staff/admins/index.php     - find_all_admins()     - FirstName: 2-255 char
+        - /staff/admins/show.php      - find_admin_by_id($id) - LastName: 2-255 char
+        - /staff/admins/new.php       - insert_admin($admin)  - Email: no blank, max.255 char, valid format
+        - /staff/admins/edit.php      - update_admin($admin)  - Username: 8-255 char, unique
+        - /staff/admins/delete.php    - delete_admin($admin)  - Password: 12+ char
+                                                              - Password: 1 upper, 1 lower, 1 number, 1 symbol
+                                                              - Confirm password: no blank, matches password
 
 
 
@@ -69,17 +73,17 @@
 
 
 
-===============================================================
- |                  # Authenticate user access               |
-===============================================================
+                    ===============================================================
+                     |                  # Authenticate user access               |
+                    ===============================================================
 
 
 
 
 
-===============================================================
- |                   # Require authorization                 |
-===============================================================
+                    ===============================================================
+                     |                   # Require authorization                 |
+                    ===============================================================
 
 
 
