@@ -69,21 +69,21 @@
                      |                   # PHP password functions                |
                     ===============================================================
 
-# Encrypting Passwords
+                    # Encrypting Passwords
 
-- Never store passwords in plain text
-- Users reuse passwords
-- Use one-way encryption
-- Same inputs + same + hashing algorithm = same output
-- Encrypts the actual password, and then stores it
-- Encrypts the attempted password and then compares it to stored password
-- Encryption algorithm: one-way, strong, slow
-- Bcrypt, based on Blowfish cipher
+                    - Never store passwords in plain text
+                    - Users reuse passwords
+                    - Use one-way encryption
+                    - Same inputs + same + hashing algorithm = same output
+                    - Encrypts the actual password, and then stores it
+                    - Encrypts the attempted password and then compares it to stored password
+                    - Encryption algorithm: one-way, strong, slow
+                    - Bcrypt, based on Blowfish cipher
 
-    // PHP > 5.5
-    - password_hash($password, PASSWORD_DEFAULT);
-    - password_hash($password, PASSWORD_BCRYPT), ['cost' => 10]);
-    - password_verify($password, $shared_password);
+                        // PHP > 5.5
+                        - password_hash($password, PASSWORD_DEFAULT);
+                        - password_hash($password, PASSWORD_BCRYPT), ['cost' => 10]);
+                        - password_verify($password, $shared_password);
 
 
 
@@ -143,11 +143,31 @@
                   }
 
 
-
-
                     ===============================================================
                      |                  # Optional password updating             |
                     ===============================================================
+                    //:.add if-statement
+                    if ($password_required) {
+                      if(is_blank($admin['password'])) {
+                        $errors[] = "Password cannot be blank.";
+                      } elseif (!has_length($admin['password'], array('min' => 12))) {
+                        $errors[] = "Password must contain 12 or more characters";
+                      } elseif (!preg_match('/[A-Z]/', $admin['password'])) {
+                        $errors[] = "Password must contain at least 1 uppercase letter";
+                      } elseif (!preg_match('/[a-z]/', $admin['password'])) {
+                        $errors[] = "Password must contain at least 1 lowercase letter";
+                      } elseif (!preg_match('/[0-9]/', $admin['password'])) {
+                        $errors[] = "Password must contain at least 1 number";
+                      } elseif (!preg_match('/[^A-Za-z0-9\s]/', $admin['password'])) {
+                        $errors[] = "Password must contain at least 1 symbol";
+                      }
+
+                      if(is_blank($admin['confirm_password'])) {
+                        $errors[] = "Confirm password cannot be blank.";
+                      } elseif ($admin['password'] !== $admin['confirm_password']) {
+                        $errors[] = "Password and confirm password must match.";
+                      }
+                    }
 
 
 
@@ -156,3 +176,11 @@
                     ===============================================================
                      |                    # Authorized previewing                |
                     ===============================================================
+                      function is_logged_in() {
+                        // Having a admin_id in the session serves a dual-purpose:
+                        // - Its presence indicates the admin is logged in.
+                        // - Its value tells which admin for looking up their record.
+                        return isset($_SESSION['admin_id']);
+                      }
+
+                    $preview = $_GET['preview'] == 'true' ? true : false;
