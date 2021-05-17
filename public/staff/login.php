@@ -20,8 +20,23 @@ if(is_post_request()) {
     }
     // if there were no errors, try to login
     if (empty($errors)) {
+        // better to use one variable to ensure that the message is the same
+        $login_failure_msg = "Log in was unsuccessful!";
         // : .find the admin
-
+        $admin = find_admin_by_username($username);
+        if ($admin){
+            if (password_verify($password, $admin['hashed_password'])) {
+                // password matches
+                log_in_admin($admin);
+                redirect_to('/staff/index.php');
+            } else {
+                // username found, but password does not match
+                $errors[] = $login_failure_msg;
+            }
+        } else {
+            // no username found
+            $errors[] = $login_failure_msg;
+        }
 
     }
 
